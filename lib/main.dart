@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
             theme: ThemeData.light(),
             darkTheme: ThemeData.dark(),
             themeMode: state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-            home: state.isOnboardingFinished ? const MyHomePage() : const OnboardingPage(),
+            home: state.isOnboardingFinished
+                ? const MyHomePage()
+                : const OnboardingPage(),
           );
         },
       ),
@@ -97,15 +99,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: const Text(
                 "Click me once every 5 Seconds",
-                
-                      
               ),
             ),
             ElevatedButton(
               onPressed: () {
-                context
-                    .read<SharedPreferencesCubit>()
-                    .toggleOnboarding();
+                context.read<SharedPreferencesCubit>().toggleOnboarding();
               },
               child: const Text("Enable Onboarding Again"),
             )
