@@ -19,15 +19,12 @@ class SharedPreferencesCubit extends Cubit<SharedPreferencesState> {
   SharedPreferencesCubit(this.sharedPreferences)
       : super(SharedPreferencesState(
           isDarkMode: false,
-          isButtonEnabled:  true,
+          isButtonEnabled: true,
           isOnboardingFinished:
               sharedPreferences.getBool("isOnboardingFinished") ?? false,
         ));
-        
-        
-        
-        
-void toggleTheme() {
+
+  void toggleTheme() {
     final bool newTheme = !state.isDarkMode;
     sharedPreferences.setBool("isDarkMode", newTheme);
     emit(SharedPreferencesState(
@@ -46,15 +43,13 @@ void toggleTheme() {
           isButtonEnabled: newButtonState,
           isOnboardingFinished: state.isOnboardingFinished));
 
-
-     await Future.delayed(
+      await Future.delayed(
         const Duration(seconds: 5),
         () {
           emit(SharedPreferencesState(
               isDarkMode: state.isDarkMode,
               isButtonEnabled: true,
               isOnboardingFinished: state.isOnboardingFinished));
-          
         },
       );
       sharedPreferences.setBool("isButtonEnabled", true);
@@ -69,6 +64,4 @@ void toggleTheme() {
         isButtonEnabled: state.isButtonEnabled,
         isOnboardingFinished: newOnboardingState));
   }
-
-
 }
